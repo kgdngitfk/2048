@@ -101,23 +101,99 @@ public class GameView extends android.widget.GridLayout {
 	}
 
 	private void swipeRight() {
-
+		for (int y = 0; y < 4; y++) {
+			for (int x = 3; x >=0 ; x--) {
+				for(int x1=x-1;x1>=0;x1--){
+					if(cards[x1][y].getNum()>=0){
+						if(cards[x][y].getNum()<=0){
+							cards[x][y].setNum(cards[x1][y].getNum());
+							cards[x1][y].setNum(0);
+							x++;
+							break;
+						}
+						else if (cards[x][y].equals(cards[x1][y])) {
+							cards[x][y].setNum(cards[x][y].getNum()*2);
+							cards[x1][y].setNum(0);
+							break;
+						}
+					}
+				}
+			}
+		}
 	}
 
 	private void swipeLeft() {
+		for (int y = 0; y < 4; y++) {
+			for (int x = 0; x < 4; x++) {
+				for(int x1=x+1;x1<4;x1++){
+					if(cards[x1][y].getNum()>=0){
+						if(cards[x][y].getNum()<=0){
+							cards[x][y].setNum(cards[x1][y].getNum());
+							cards[x1][y].setNum(0);
+							x--;
+							break;
+						}
+						else if (cards[x][y].equals(cards[x1][y])) {
+							cards[x][y].setNum(cards[x][y].getNum()*2);
+							cards[x1][y].setNum(0);
+							break;
+						}
+					}
+				}
+			}
+		}
 
 	}
 
 	private void swipeUp() {
+		for (int x = 0; x < 4; x++) {
+			for (int y = 0; y < 4; y++) {
+				for(int y1=y+1;y1<4;y1++){
+					if(cards[x][y1].getNum()>=0){
+						if(cards[x][y].getNum()<=0){
+							cards[x][y].setNum(cards[x][y1].getNum());
+							cards[x][y1].setNum(0);
+							y--;
+							break;
+						}
+						else if (cards[x][y].equals(cards[x][y1])) {
+							cards[x][y].setNum(cards[x][y].getNum()*2);
+							cards[x][y1].setNum(0);
+							break;
+						}
+					}
+				}
+			}
+		}
 
 	}
 
 	private void swipeDown() {
+		for (int x = 0; x < 4; x++) {
+			for (int y = 3; y >=0; y--) {
+				for(int y1=y-1;y1>=0;y1--){
+					if(cards[x][y1].getNum()>=0){
+						if(cards[x][y].getNum()<=0){
+							cards[x][y].setNum(cards[x][y1].getNum());
+							cards[x][y1].setNum(0);
+							y--;
+							break;
+						}
+						else if (cards[x][y].equals(cards[x][y1])) {
+							cards[x][y].setNum(cards[x][y].getNum()*2);
+							cards[x][y1].setNum(0);
+							break;
+						}
+					}
+				}
+			}
+		}
 
 	}
-	private void startGame(){
-		for(int y=0;y<4;y++){
-			for(int x =0;x<4;x++){
+
+	private void startGame() {
+		for (int y = 0; y < 4; y++) {
+			for (int x = 0; x < 4; x++) {
 				cards[x][y].setNum(0);
 			}
 		}
@@ -134,8 +210,8 @@ public class GameView extends android.widget.GridLayout {
 				}
 			}
 		}
-		Point p = emptyPoints.remove((int)(Math.random()*emptyPoints.size()));
-		cards[p.x][p.y].setNum(Math.random()>0.1?2:4);
+		Point p = emptyPoints.remove((int) (Math.random() * emptyPoints.size()));
+		cards[p.x][p.y].setNum(Math.random() > 0.1 ? 2 : 4);
 	}
 
 }
